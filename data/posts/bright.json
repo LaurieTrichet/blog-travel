@@ -1,0 +1,10 @@
+{
+    "center": "Bright, vic",
+    "zoom" : 18,
+    "markers":[
+        {
+            "lat": -36.728178,
+            "lon": 146.953831
+        }
+    ]
+}

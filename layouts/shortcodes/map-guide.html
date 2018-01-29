@@ -1,0 +1,7 @@
+
+{{ with .Get "url" }}
+    {{ $url := .}}
+    {{ $place := getJSON $url}}
+
+<img src="https://maps.googleapis.com/maps/api/staticmap?zoom={{ $place.zoom }}&size=600x600&scale=2&maptype=roadmap&{{ range $place.markers }}{{ $position := .}}markers=color:blue|label:S|{{$position.lat}},{{$position.lon}}&{{ end }}key={{ $.Site.Params.googleMapsApiKey }}" />
+{{ end }}
