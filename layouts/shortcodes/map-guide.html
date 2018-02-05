@@ -1,7 +1,23 @@
-
+<script src="{{ .Site.BaseURL}}js/map.js"></script>
 {{ with .Get "url" }}
     {{ $url := .}}
     {{ $place := getJSON $url}}
+    <div id="map" style="width=80%; height=40%;"/>
+    <script>
+        function initMap() {
 
-<img src="https://maps.googleapis.com/maps/api/staticmap?zoom={{ $place.zoom }}&size=600x600&scale=2&maptype=roadmap&{{ range $place.markers }}{{ $position := .}}markers=color:blue|label:S|{{$position.lat}},{{$position.lon}}&{{ end }}key={{ $.Site.Params.googleMapsApiKey }}" />
+           var map = addMap({{$place.lat}}, {{$place.lon}}, {{$place.zoom}}, 'map')
+
+            {{ range $place.markers }}{{ $position := .}}
+    
+                addMarker({{$position.lat}}, {{$position.lon}}, map)
+
+            {{ end }}
+
+        }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ $.Site.Params.googleMapsApiKey }}&callback=initMap"
+    async defer></script>
+
 {{ end }}
